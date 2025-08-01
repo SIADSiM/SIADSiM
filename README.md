@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="![image1](./zzz.gif)" width="320" alt="Animated character watering" />
+  <img src="![image1](zzz.gif)" width="320" alt="Animated character" />
 </p>
 
 <h1 align="center">Welcome to My Living Lab!</h1>
