@@ -1,28 +1,27 @@
-name: Update Traffic Stats
+name: Update Repository Traffic Graph
 on:
-  push:
-    branches:
-      - main # Or your default branch
   schedule:
-    - cron: '0 0 * * *' # Runs every day at midnight UTC
-  workflow_dispatch: # Allows you to run it manually
+    # Runs "At 00:00" (midnight) every day
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allows you to run it manually from the Actions tab
 
 jobs:
-  update-traffic-stats:
+  update_traffic_graph:
     runs-on: ubuntu-latest
-    # Add this permissions block
     permissions:
-      # Grant write permission to the 'contents' scope to allow the Action to commit the SVG file
+      # This permission is needed for the action to commit the updated graph to your repository
       contents: write
-    name: "Update traffic stats"
     steps:
-      - name: "Checkout repository"
-        uses: actions/checkout@v4
-
-      - name: "Generate traffic stats image"
-        uses: yi-Xu-0100/traffic-to-image@main
+      - uses: lowlighter/metrics@latest
         with:
-          # The output file path for the traffic image
-          traffic_image_path: ./traffic.svg 
-          # This correctly uses the secure, built-in GITHUB_TOKEN
-          my_token: ${{ secrets.GITHUB_TOKEN }}
+          # This is your repository's built-in, secure token
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+          # Specify the output file name
+          filename: traffic.svg
+          
+          # We are disabling the default "base" metrics to only show the traffic plugin
+          base: ""
+          
+          # Enable the traffic plugin
+          plugins_traffic: yes
