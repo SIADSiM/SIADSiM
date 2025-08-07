@@ -1,40 +1,39 @@
-name: Auto-add & Update Repo Traffic Badges with Heading
+name: Update Traffic Badges for All My Public Repos
 
 on:
   schedule:
-    - cron: "0 0 * * *" # daily at midnight UTC
+    - cron: '0 0 * * *'   # Daily at midnight UTC
   workflow_dispatch:
 
 jobs:
   update-badges:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout dashboard repo
         uses: actions/checkout@v4
 
-      - name: Prepare README and update badges
+      - name: Update README with traffic badges for all repos
         run: |
           README="README.md"
           TMP="README.tmp"
           HEADING="## 📊 Repository Views"
 
-          # Ensure the README has the heading; if not, add it at the end
+          # Add heading if missing
           if ! grep -q "^$HEADING" "$README"; then
             echo -e "\n$HEADING\n" >> "$README"
           fi
 
-          # Extract content before the heading
+          # Preserve content above the heading
           sed "/^$HEADING/,\$d" "$README" > "$TMP"
 
-          # Add the heading back
+          # Add the heading
           echo -e "\n$HEADING\n" >> "$TMP"
 
-          # Fetch all your public repos (max 100)
-          REPOS=$(curl -s -H "Authorization: token ${{ secrets.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 }}" \
+          # Get all your public repos
+          REPOS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
             "https://api.github.com/user/repos?visibility=public&per_page=100" \
             | jq -r '.[].name')
 
-          # For each repo, get views and prepare badge markdown
           for REPO in $REPOS; do
             RESPONSE=$(curl -s \
               -H "Accept: application/vnd.github+json" \
@@ -43,18 +42,15 @@ jobs:
 
             TOTAL=$(echo "$RESPONSE" | jq '.count')
 
-            BADGE="![${REPO} Views](https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue)"
-
-            echo "$BADGE" >> "$TMP"
+            echo "![${REPO} Views](https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue)" >> "$TMP"
           done
 
-          # Overwrite README with new content
           mv "$TMP" "$README"
 
-      - name: Commit and push changes
+      - name: Commit and push
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git diff --cached --quiet || git commit -m "Auto-update repository traffic badges"
+          git diff --cached --quiet || git commit -m "Update traffic badges for all repos"
           git push
