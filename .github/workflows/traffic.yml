@@ -2,7 +2,7 @@ name: Update Traffic Stats for All Public Repos
 
 on:
   schedule:
-    - cron: "0 0 * * *" # once per day
+    - cron: "0 0 * * *" # Run daily at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -12,37 +12,62 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Get traffic data for all public repos
+      - name: Generate traffic report
         run: |
-          echo "# 📊 Traffic Stats" > TRAFFIC.md
+          echo "" > TRAFFIC.md
+          echo "## 📊 GitHub Traffic Stats (last 14 days)" >> TRAFFIC.md
+          echo "_Auto-generated from GitHub Traffic API_" >> TRAFFIC.md
           echo "" >> TRAFFIC.md
 
-          # Get list of your public repos
-          REPOS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-            "https://api.github.com/user/repos?visibility=public&per_page=100" | jq -r '.[].name')
+          # Get all your public repos
+          REPOS=$(curl -s -H "Authorization: token ${{ secrets.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 }}" \
+            "https://api.github.com/user/repos?visibility=public&per_page=100" \
+            | jq -r '.[].name')
 
           for REPO in $REPOS; do
-            echo "Fetching traffic for $REPO..."
-            
+            echo "Fetching data for $REPO..."
+
             VIEWS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
               "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views")
             CLONES=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
               "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/clones")
+            REFERRERS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/popular/referrers")
+            PATHS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/popular/paths")
 
             TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
             UNIQUE_VIEWS=$(echo "$VIEWS" | jq '.uniques')
             TOTAL_CLONES=$(echo "$CLONES" | jq '.count')
             UNIQUE_CLONES=$(echo "$CLONES" | jq '.uniques')
 
-            echo "## $REPO" >> TRAFFIC.md
-            echo "- Views: **$TOTAL_VIEWS** (unique: $UNIQUE_VIEWS)" >> TRAFFIC.md
-            echo "- Clones: **$TOTAL_CLONES** (unique: $UNIQUE_CLONES)" >> TRAFFIC.md
+            echo "### $REPO" >> TRAFFIC.md
+            echo "- **Views:** $TOTAL_VIEWS (unique: $UNIQUE_VIEWS)" >> TRAFFIC.md
+            echo "- **Clones:** $TOTAL_CLONES (unique: $UNIQUE_CLONES)" >> TRAFFIC.md
+
+            # Add top referrers
+            if [ "$(echo $REFERRERS | jq length)" -gt 0 ]; then
+              echo "- **Top Referrers:**" >> TRAFFIC.md
+              echo "$REFERRERS" | jq -r '.[] | "  - \(.referrer): \(.count) views"' >> TRAFFIC.md
+            fi
+
+            # Add popular content
+            if [ "$(echo $PATHS | jq length)" -gt 0 ]; then
+              echo "- **Popular Content:**" >> TRAFFIC.md
+              echo "$PATHS" | jq -r '.[] | "  - \(.path) (\(.count) views)"' >> TRAFFIC.md
+            fi
+
             echo "" >> TRAFFIC.md
           done
 
-      - name: Commit updated traffic stats
+      - name: Append traffic stats to README
         run: |
-          mv TRAFFIC.md README.md  # or append if you want to keep your README
+          # Remove old stats section if exists
+          sed -i '/## 📊 GitHub Traffic Stats (last 14 days)/,$d' README.md
+          cat TRAFFIC.md >> README.md
+
+      - name: Commit and push changes
+        run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add README.md
