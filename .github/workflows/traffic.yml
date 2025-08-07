@@ -1,0 +1,23 @@
+name: Update Traffic Stats
+on:
+  push:
+    branches:
+      - main # Or your default branch
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight UTC
+  workflow_dispatch: # Allows you to run it manually
+jobs:
+  update-traffic-stats:
+    runs-on: ubuntu-latest
+    name: "Update traffic stats"
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "Generate traffic stats image"
+        uses: yi-Xu-0100/traffic-to-image@main
+        with:
+          # The output file path for the traffic image
+          traffic_image_path: ./traffic.svg 
+          # Your personal access token with 'repo' scope
+          my_token: ${{ secrets.GITHUB_TOKEN }}
