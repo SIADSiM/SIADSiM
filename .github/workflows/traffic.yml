@@ -9,7 +9,7 @@ jobs:
   update_traffic_graph:
     runs-on: ubuntu-latest
     permissions:
-      # This permission is needed for the action to commit the updated graph to your repository
+      # This permission is needed for the action to commit the updated graph
       contents: write
     steps:
       - uses: lowlighter/metrics@latest
@@ -20,7 +20,7 @@ jobs:
           # Specify the output file name
           filename: traffic.svg
           
-          # We are disabling the default "base" metrics to only show the traffic plugin
+          # Disable default metrics to only show the traffic plugin
           base: ""
           
           # Enable the traffic plugin
