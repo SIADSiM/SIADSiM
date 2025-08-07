@@ -1,3 +1,8 @@
+### Repository Traffic
+
+![Repository Traffic](./traffic.svg)
+
+
 <p align="center">
   <img src="zzz.gif" width="320" alt="Animated chaos of genius" />
 </p>
