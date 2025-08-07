@@ -1,8 +1,8 @@
-name: Auto-add & Update Repo Traffic Badges
+name: Auto-add & Update Repo Traffic Badges with Heading
 
 on:
   schedule:
-    - cron: "0 0 * * *" # every day at midnight UTC
+    - cron: "0 0 * * *" # daily at midnight UTC
   workflow_dispatch:
 
 jobs:
@@ -12,49 +12,49 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Get all public repos & update badges
+      - name: Prepare README and update badges
         run: |
-          README_FILE="README.md"
-          TMP_FILE="README.tmp"
+          README="README.md"
+          TMP="README.tmp"
+          HEADING="## 📊 Repository Views"
 
-          cp "$README_FILE" "$TMP_FILE"
+          # Ensure the README has the heading; if not, add it at the end
+          if ! grep -q "^$HEADING" "$README"; then
+            echo -e "\n$HEADING\n" >> "$README"
+          fi
 
-          # Fetch list of your public repos
+          # Extract content before the heading
+          sed "/^$HEADING/,\$d" "$README" > "$TMP"
+
+          # Add the heading back
+          echo -e "\n$HEADING\n" >> "$TMP"
+
+          # Fetch all your public repos (max 100)
           REPOS=$(curl -s -H "Authorization: token ${{ secrets.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 }}" \
             "https://api.github.com/user/repos?visibility=public&per_page=100" \
             | jq -r '.[].name')
 
+          # For each repo, get views and prepare badge markdown
           for REPO in $REPOS; do
-            echo "Processing $REPO..."
-
-            # Get traffic views
             RESPONSE=$(curl -s \
               -H "Accept: application/vnd.github+json" \
               -H "Authorization: token ${{ secrets.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 }}" \
-              https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views)
+              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views")
 
             TOTAL=$(echo "$RESPONSE" | jq '.count')
 
-            # Badge markdown
-            BADGE_MD="![${REPO} Views](https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue)"
+            BADGE="![${REPO} Views](https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue)"
 
-            # Escape slashes for grep/sed
-            ESCAPED_REPO=$(echo "$REPO" | sed 's/\//\\\//g')
-
-            # If badge exists → update; else → add at the bottom of the README
-            if grep -q "${REPO}_Views-" "$TMP_FILE"; then
-              sed -i "s|https://img.shields.io/badge/${ESCAPED_REPO}_Views-[0-9]\+-blue|https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue|" "$TMP_FILE"
-            else
-              echo "$BADGE_MD" >> "$TMP_FILE"
-            fi
+            echo "$BADGE" >> "$TMP"
           done
 
-          mv "$TMP_FILE" "$README_FILE"
+          # Overwrite README with new content
+          mv "$TMP" "$README"
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git commit -m "Auto-update traffic badges" || echo "No changes"
+          git diff --cached --quiet || git commit -m "Auto-update repository traffic badges"
           git push
