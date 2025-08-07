@@ -38,7 +38,7 @@ jobs:
           for REPO in $REPOS; do
             RESPONSE=$(curl -s \
               -H "Accept: application/vnd.github+json" \
-              -H "Authorization: token ${{ secrets.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 }}" \
+              -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
               "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views")
 
             TOTAL=$(echo "$RESPONSE" | jq '.count')
