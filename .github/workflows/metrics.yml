@@ -1,0 +1,32 @@
+# .github/workflows/metrics.yml
+name: Combined Repository Metrics
+on:
+  # Schedule updates every 24 hours
+  schedule:
+    - cron: '0 0 * * *'
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  metrics:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Needed to commit the updated metrics file
+    steps:
+      - name: Generate aggregated metrics
+        uses: lowlighter/metrics@latest
+        with:
+          # Your GitHub token
+          # This is automatically provided by GitHub
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Point to the file where the SVG will be generated
+          filename: metrics.svg
+
+          # Comma-separated list of plugins to use
+          # "traffic" is the key plugin for your goal
+          plugins_traffic: yes
+
+          # Exclude the base "header" and other default elements to keep it clean
+          # You can re-enable them later if you like the look
+          base: ""
