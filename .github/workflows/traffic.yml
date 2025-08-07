@@ -1,75 +1,60 @@
-name: Update Traffic Stats for All Public Repos
+name: Auto-add & Update Repo Traffic Badges
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Run daily at midnight UTC
+    - cron: "0 0 * * *" # every day at midnight UTC
   workflow_dispatch:
 
 jobs:
-  update-traffic:
+  update-badges:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate traffic report
+      - name: Get all public repos & update badges
         run: |
-          echo "" > TRAFFIC.md
-          echo "## 📊 GitHub Traffic Stats (last 14 days)" >> TRAFFIC.md
-          echo "_Auto-generated from GitHub Traffic API_" >> TRAFFIC.md
-          echo "" >> TRAFFIC.md
+          README_FILE="README.md"
+          TMP_FILE="README.tmp"
 
-          # Get all your public repos
+          cp "$README_FILE" "$TMP_FILE"
+
+          # Fetch list of your public repos
           REPOS=$(curl -s -H "Authorization: token ${{ secrets.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 }}" \
             "https://api.github.com/user/repos?visibility=public&per_page=100" \
             | jq -r '.[].name')
 
           for REPO in $REPOS; do
-            echo "Fetching data for $REPO..."
+            echo "Processing $REPO..."
 
-            VIEWS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views")
-            CLONES=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/clones")
-            REFERRERS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/popular/referrers")
-            PATHS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/popular/paths")
+            # Get traffic views
+            RESPONSE=$(curl -s \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: token ${{ secrets.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 }}" \
+              https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views)
 
-            TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
-            UNIQUE_VIEWS=$(echo "$VIEWS" | jq '.uniques')
-            TOTAL_CLONES=$(echo "$CLONES" | jq '.count')
-            UNIQUE_CLONES=$(echo "$CLONES" | jq '.uniques')
+            TOTAL=$(echo "$RESPONSE" | jq '.count')
 
-            echo "### $REPO" >> TRAFFIC.md
-            echo "- **Views:** $TOTAL_VIEWS (unique: $UNIQUE_VIEWS)" >> TRAFFIC.md
-            echo "- **Clones:** $TOTAL_CLONES (unique: $UNIQUE_CLONES)" >> TRAFFIC.md
+            # Badge markdown
+            BADGE_MD="![${REPO} Views](https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue)"
 
-            # Add top referrers
-            if [ "$(echo $REFERRERS | jq length)" -gt 0 ]; then
-              echo "- **Top Referrers:**" >> TRAFFIC.md
-              echo "$REFERRERS" | jq -r '.[] | "  - \(.referrer): \(.count) views"' >> TRAFFIC.md
+            # Escape slashes for grep/sed
+            ESCAPED_REPO=$(echo "$REPO" | sed 's/\//\\\//g')
+
+            # If badge exists → update; else → add at the bottom of the README
+            if grep -q "${REPO}_Views-" "$TMP_FILE"; then
+              sed -i "s|https://img.shields.io/badge/${ESCAPED_REPO}_Views-[0-9]\+-blue|https://img.shields.io/badge/${REPO}_Views-${TOTAL}-blue|" "$TMP_FILE"
+            else
+              echo "$BADGE_MD" >> "$TMP_FILE"
             fi
-
-            # Add popular content
-            if [ "$(echo $PATHS | jq length)" -gt 0 ]; then
-              echo "- **Popular Content:**" >> TRAFFIC.md
-              echo "$PATHS" | jq -r '.[] | "  - \(.path) (\(.count) views)"' >> TRAFFIC.md
-            fi
-
-            echo "" >> TRAFFIC.md
           done
 
-      - name: Append traffic stats to README
-        run: |
-          # Remove old stats section if exists
-          sed -i '/## 📊 GitHub Traffic Stats (last 14 days)/,$d' README.md
-          cat TRAFFIC.md >> README.md
+          mv "$TMP_FILE" "$README_FILE"
 
       - name: Commit and push changes
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git commit -m "Update traffic stats" || echo "No changes"
+          git commit -m "Auto-update traffic badges" || echo "No changes"
           git push
