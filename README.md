@@ -1,3 +1,6 @@
+![Views](https://img.shields.io/badge/Views-0-blue)
+
+
 <p align="center">
   <img src="zzz.gif" width="320" alt="Animated chaos of genius" />
 </p>
