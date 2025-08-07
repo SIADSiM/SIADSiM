@@ -1,3 +1,7 @@
+### All Repositories Traffic
+
+![Combined Repository Traffic](./metrics.svg)
+
 <p align="center">
   <img src="zzz.gif" width="320" alt="Animated chaos of genius" />
 </p>
