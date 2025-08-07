@@ -1,37 +1,50 @@
-name: Update Traffic Badge
+name: Update Traffic Stats for All Public Repos
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs daily at midnight UTC
-  workflow_dispatch: # Allow manual run
+    - cron: "0 0 * * *" # once per day
+  workflow_dispatch:
 
 jobs:
-  update-badge:
+  update-traffic:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Get traffic views
-        id: traffic
+      - name: Get traffic data for all public repos
         run: |
-          RESPONSE=$(curl -s \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: token ${{ secrets.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 }}" \
-            https://api.github.com/repos/${{ github.repository }}/traffic/views)
+          echo "# 📊 Traffic Stats" > TRAFFIC.md
+          echo "" >> TRAFFIC.md
 
-          TOTAL=$(echo "$RESPONSE" | jq '.count')
-          echo "total_views=$TOTAL" >> $GITHUB_ENV
+          # Get list of your public repos
+          REPOS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+            "https://api.github.com/user/repos?visibility=public&per_page=100" | jq -r '.[].name')
 
-      - name: Update README badge
+          for REPO in $REPOS; do
+            echo "Fetching traffic for $REPO..."
+            
+            VIEWS=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/views")
+            CLONES=$(curl -s -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/traffic/clones")
+
+            TOTAL_VIEWS=$(echo "$VIEWS" | jq '.count')
+            UNIQUE_VIEWS=$(echo "$VIEWS" | jq '.uniques')
+            TOTAL_CLONES=$(echo "$CLONES" | jq '.count')
+            UNIQUE_CLONES=$(echo "$CLONES" | jq '.uniques')
+
+            echo "## $REPO" >> TRAFFIC.md
+            echo "- Views: **$TOTAL_VIEWS** (unique: $UNIQUE_VIEWS)" >> TRAFFIC.md
+            echo "- Clones: **$TOTAL_CLONES** (unique: $UNIQUE_CLONES)" >> TRAFFIC.md
+            echo "" >> TRAFFIC.md
+          done
+
+      - name: Commit updated traffic stats
         run: |
-          BADGE_URL="https://img.shields.io/badge/Views-${{ env.total_views }}-blue"
-          sed -i "s|!\[Views\](.*)|![Views](${BADGE_URL})|" README.md
-
-      - name: Commit changes
-        run: |
+          mv TRAFFIC.md README.md  # or append if you want to keep your README
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git commit -m "Update traffic badge" || echo "No changes"
+          git commit -m "Update traffic stats" || echo "No changes"
           git push
