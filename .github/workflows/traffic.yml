@@ -6,9 +6,14 @@ on:
   schedule:
     - cron: '0 0 * * *' # Runs every day at midnight UTC
   workflow_dispatch: # Allows you to run it manually
+
 jobs:
   update-traffic-stats:
     runs-on: ubuntu-latest
+    # Add this permissions block
+    permissions:
+      # Grant write permission to the 'contents' scope to allow the Action to commit the SVG file
+      contents: write
     name: "Update traffic stats"
     steps:
       - name: "Checkout repository"
@@ -19,5 +24,5 @@ jobs:
         with:
           # The output file path for the traffic image
           traffic_image_path: ./traffic.svg 
-          # Your personal access token with 'repo' scope
+          # This correctly uses the secure, built-in GITHUB_TOKEN
           my_token: ${{ secrets.GITHUB_TOKEN }}
