@@ -1,40 +1,35 @@
 # .github/workflows/metrics.yml
 name: Metrics
 on:
-  # Schedule daily updates
-  schedule: [{cron: "0 0 * * *"}]
-  # Run automatically when code is pushed to the main branch
-  push: { branches: ["main", "master"] }
-  # Allow manual runs from the Actions tab
-  workflow_dispatch:
+  schedule: [{cron: "0 0 * * *"}] # Runs once a day at midnight UTC
+  workflow_dispatch: # Allows manual runs
 
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Needed to commit the generated metrics file
+      contents: write
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          # This is the token we'll set up in the next step
+          # ✅ Corrected to use your secret key name
           token: ${{ secrets.GH_TOKEN }}
 
           # OPTIONS
-          # Base content
+          template: classic
           base: header, activity, community, repositories, metadata
           
-          # Template
-          template: classic
-          
-          # Plugins
-          # Enable and configure the plugins you want
+          # ENABLE ALL INTERESTING PLUGINS
           plugin_achievements: yes
+          plugin_discussions: yes
+          plugin_followup: yes
+          plugin_gists: yes
           plugin_habits: yes
+          plugin_habits_from: 200
           plugin_habits_charts: yes
-          plugin_habits_days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
-          plugin_habits_from: 200 # Display habits from the last 200 commits
           plugin_languages: yes
           plugin_languages_limit: 8
-          plugin_lines: yes
           plugin_people: yes
           plugin_people_types: followers, following
+          plugin_reactions: yes
+          plugin_traffic: yes
