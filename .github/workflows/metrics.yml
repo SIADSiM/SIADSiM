@@ -20,7 +20,7 @@ jobs:
           base: header, activity, community, repositories, metadata
           
           # ENABLE ALL INTERESTING PLUGINS
-          plugin_achievements: yes
+          plugin_achievements: no
           plugin_discussions: yes
           plugin_followup: yes
           plugin_gists: yes
