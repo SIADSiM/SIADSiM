@@ -1,3 +1,4 @@
+![Metrics](metrics.svg)
 # ⚗️ Welcome to the Experimental LAB ⚡
 <p align="center">
   <img src="zzz.gif" width="320" alt="Animated chaos of genius" />
