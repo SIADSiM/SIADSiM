@@ -1,7 +1,8 @@
 # .github/workflows/metrics.yml
-name: Metrics - Corrected Test
+name: Metrics
 on:
-  workflow_dispatch: # Manual runs only for this test
+  schedule: [{cron: "0 0 * * *"}]
+  workflow_dispatch:
 
 jobs:
   github-metrics:
@@ -12,15 +13,15 @@ jobs:
       - uses: lowlighter/metrics@latest
         with:
           token: ${{ secrets.GH_TOKEN }}
+          # The "committer_branch" line has been removed.
+          # It will now commit to the default branch (main).
+
+          # OPTIONS
+          template: classic
+          base: header, activity, community, repositories, metadata
           
-          # ✅ CORRECTED parameter name
-          committer_branch: metrics-render
-          
-          # PLUGINS
-          # ✅ DISABLED the failing plugin
-          plugin_achievements: no
-          
-          # All other plugins will still run
+          # ALL WORKING PLUGINS
+          plugin_achievements: no # This plugin is still disabled as it's broken
           plugin_discussions: yes
           plugin_followup: yes
           plugin_gists: yes
