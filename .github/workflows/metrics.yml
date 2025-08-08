@@ -1,8 +1,7 @@
 # .github/workflows/metrics.yml
-name: Metrics
+name: Metrics - Corrected Test
 on:
-  schedule: [{cron: "0 0 * * *"}] # Runs once a day at midnight UTC
-  workflow_dispatch: # Allows manual runs
+  workflow_dispatch: # Manual runs only for this test
 
 jobs:
   github-metrics:
@@ -12,15 +11,16 @@ jobs:
     steps:
       - uses: lowlighter/metrics@latest
         with:
-          # ✅ Corrected to use your secret key name
           token: ${{ secrets.GH_TOKEN }}
-
-          # OPTIONS
-          template: classic
-          base: header, activity, community, repositories, metadata
           
-          # ENABLE ALL INTERESTING PLUGINS
+          # ✅ CORRECTED parameter name
+          committer_branch: metrics-render
+          
+          # PLUGINS
+          # ✅ DISABLED the failing plugin
           plugin_achievements: no
+          
+          # All other plugins will still run
           plugin_discussions: yes
           plugin_followup: yes
           plugin_gists: yes
