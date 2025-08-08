@@ -17,6 +17,27 @@
 
 ## 📊 Lab Activity Overview
 
-<p align="center">
-  <img src="github-metrics.svg" alt="Metrics" />
-</p>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+  <tr align="center">
+    <td>
+      <img src="https://github-readme-stats.vercel.app/api?username=SIADSiM&show_icons=true&theme=default&hide_border=true&bg_color=FFFFFF" alt="GitHub Stats" />
+    </td>
+    <td>
+      <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=SIADSiM&layout=compact&theme=default&hide_border=true&bg_color=FFFFFF" alt="Top Languages" />
+    </td>
+    <td>
+      <img src="https://streak-stats.demolab.com/?user=SIADSiM&theme=default&hide_border=true&background=FFFFFF" alt="GitHub Streak" />
+    </td>
+  </tr>
+  <tr align="center">
+    <td>
+      <img src="https://github-profile-trophy.vercel.app/?username=SIADSiM&theme=flat&no-frame=true&no-bg=true" alt="GitHub Trophies" />
+    </td>
+    <td>
+      <img src="https://github-readme-activity-graph.vercel.app/graph?username=SIADSiM&theme=github&hide_border=true" alt="Activity Graph" />
+    </td>
+    <td>
+       <img src="https://github-readme-stats.vercel.app/api/pin/?username=SIADSiM&repo=SIADSiM&theme=default&hide_border=true&bg_color=FFFFFF" alt="Pinned Repo" />
+    </td>
+  </tr>
+</table>
