@@ -1,79 +1,56 @@
+# ⚗️ Welcome to the Experimental LAB ⚡
 <p align="center">
   <img src="zzz.gif" width="320" alt="Animated chaos of genius" />
 </p>
 
-<h1 align="center">⚗️ Welcome to the Experimental LAB ⚡</h1>
 <p align="center">
   <b>🚀 Innovation | 💥 Risk | 🧪 Weird Science | 🤯 Genius in Disguise</b>
 </p>
 
----
-
-## 🎭 What is this place?
-Think of it as a *sandbox with rocket fuel*:  
-- Ideas born here might **change the game**… or blow it up (metaphorically… probably).
-- Mixing **serious science** with **playful madness**.
-- Expect **bugs**, **breakthroughs**, and **beautiful accidents**.
-
----
-
-## 🧩 Live Experiments (Enter at Your Own Risk)
-
-<details>
-  <summary>🌦️ <b>Irrigation Oracle</b> (Sometimes right, always confident)</summary>
-  <blockquote>
-    Soil Moisture: <code>0.32 m³/m³</code> <br>
-    Rain Forecast: <code>8 mm</code> <br>
-    Crop: <code>Durum Wheat</code>
-    <br><br>
-    <b>Result:</b> No irrigation needed 🚫💧  
-    <sub>Reasoning: The AI says so. And it’s in charge here.</sub>
-  </blockquote>
-</details>
-
----
-
-<details>
-  <summary>🛰️ <b>Satellite Crop Mood Scanner</b></summary>
-  <blockquote>
-    NDVI says your crops are “happy” 🌱.  
-    We’re still working on detecting sarcasm from plants.
-  </blockquote>
-</details>
-
----
-
-<details>
-  <summary>🤖 <b>Frankenstein Model Coupling</b></summary>
-  <blockquote>
-    VIC talks to DSSAT, which talks to AquaCrop, which talks to… the coffee machine.  
-    Status: Models synced ✔️ Coffee still brewing ☕
-  </blockquote>
-</details>
-
----
-
-## 🛠️ Toolkit of Questionable Genius
-- **Languages**: Python, MATLAB, R, C++, Julia
-- **Models**: DSSAT, VIC, AquaCrop, SWAT, MIKE SHE
-- **Specialties**: Turning good science into *chaotic prototypes that work… eventually*.
-
----
-
-## 🧠 Ongoing Mayhem
-- 🌾 Merging satellites + soil sensors to make crops smarter than their farmers.
-- 🛰️ Real-time crop health alerts… with personality.
-- 🤖 Plug & Play AI for agriculture—because what could possibly go wrong?
-
----
-
-## 📢 Collaborate (If You Dare)
-> Got a wild idea? Need a prototype that might just work?  
-> [Open a discussion](https://github.com/SIADSiM/SIADSiM/discussions) and let’s make something dangerously innovative.
-
----
-
 <p align="center">
-  <em>“Innovation is messy. That’s why it’s fun.”</em> <br>
-  <sub>No safety goggles? No problem. Probably.</sub>
+  <img src="https://komarev.com/ghpvc/?username=SIADSiM&label=Lab%20Visitors&color=brightgreen&style=for-the-badge" alt="visitor badge" />
+  <img src="https://img.shields.io/github/last-commit/SIADSiM/SIADSiM?style=for-the-badge&color=4caf50" alt="last commit" />
+  <img src="https://img.shields.io/github/stars/SIADSiM/SIADSiM?style=for-the-badge&color=ffb300" alt="stars" />
 </p>
+
+---
+
+## 📊 Lab Activity Overview
+
+<table align="center" width="100%" style="table-layout: fixed; border-collapse: collapse;">
+<tr valign="top">
+  <td align="center" style="padding: 10px;">
+    <img src="https://github-readme-stats.vercel.app/api?username=SIADSiM&show_icons=true&theme=light&bg_color=FFFFFF&title_color=696969&icon_color=A9A9A9&text_color=505050" alt="GitHub Stats" />
+  </td>
+  <td align="center" style="padding: 10px;">
+    <img src="https://github.com/ryo-ma/github-profile-trophy/blob/master/images/demo.png?raw=true" alt="GitHub Trophies" />
+  </td>
+  <td align="center" style="padding: 10px;">
+    <img src="https://streak-stats.demolab.com/?user=SIADSiM&theme=light" alt="GitHub Streak Stats" />
+  </td>
+</tr>
+
+<tr valign="top">
+  <td align="center" style="padding: 10px;">
+    <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=SIADSiM&layout=compact&theme=light&bg_color=FFFFFF&title_color=696969&text_color=505050" alt="Top Languages" />
+  </td>
+  <td align="center" style="padding: 10px;">
+    <img src="https://github-readme-activity-graph.vercel.app/graph?username=SIADSiM&theme=github-light&hide_border=true" alt="GitHub Activity Graph" />
+  </td>
+  <td align="center" style="padding: 10px;">
+    <img src="https://metrics.lecoq.io/SIADSiM?template=classic&config_timezone=Europe%2FVienna&habits=1&habits.charts=week" alt="Coding Habits" />
+  </td>
+</tr>
+
+<tr valign="top">
+  <td align="center" style="padding: 10px;">
+    <img src="https://metrics.lecoq.io/SIADSiM?template=classic&config_timezone=Europe%2FVienna&achievements=1&achievements.threshold=C" alt="GitHub Achievements" />
+  </td>
+  <td align="center" style="padding: 10px;">
+    <img src="https://metrics.lecoq.io/SIADSiM?template=classic&config_timezone=Europe%2FVienna&languages=1&languages.donut=0.5" alt="Languages Donut" />
+  </td>
+  <td align="center" style="padding: 10px;">
+    <img src="https://metrics.lecoq.io/SIADSiM?template=classic&config_timezone=Europe%2FVienna&repositories=1&repositories.starred=4" alt="Notable Contributions" />
+  </td>
+</tr>
+</table>
