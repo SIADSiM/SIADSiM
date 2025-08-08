@@ -17,7 +17,7 @@ jobs:
       - uses: lowlighter/metrics@latest
         with:
           # This is the token we'll set up in the next step
-          token: ${{ secrets.METRICS_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
 
           # OPTIONS
           # Base content
