@@ -18,5 +18,5 @@
 ## 📊 Lab Activity Overview
 
 <p align="center">
-  <img src="metrics.svg" alt="Metrics" />
+  <img src="https://raw.githubusercontent.com/SIADSiM/SIADSiM/metrics-render/metrics.svg" alt="Metrics" />
 </p>
