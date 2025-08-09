@@ -22,6 +22,8 @@ DOMAIN EXPERTISE
 - Remote Sensing & GIS
 - Water Resources Management
 - Climate Change Impact Assessment
+```
+
 ```text
 PROGRAMMING & SOFTWARE ENGINEERING
 ----------------------------------
