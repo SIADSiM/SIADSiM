@@ -1,8 +1,8 @@
-# Dr. Si Mokrane SIAD
+# Si Mokrane SIAD, Ph.D.
 
 > **Researcher & Developer | Environmental Systems Modeling & Scientific Software Engineering**
 >
-> PhD in Risk and Environment, Territorial and Building Development
+> Ph.D. in Risk and Environment, Territorial and Building Development
 
 ---
 
