@@ -28,21 +28,13 @@ PROGRAMMING & SOFTWARE ENGINEERING
 - Languages: FORTRAN (77/90/95), Python, R, Julia, C++, MATLAB & Simulink
 - Development: Algorithm Design, High-Performance Computing, Model Coupling
 ```
-<br>
-
-### ▍ **Proficiency with Key Scientific Models**
-
-My research and development work involves the deep utilization, modification, and coupling of the following industry-standard scientific models:
-
-`SWAT` `DSSAT` `VIC` `MIKE SHE` `AquaCrop / AquaCrop-GIS` `WaterGEMS` `DREAM` `HBV` `TOPMODEL`
 
 <br>
 
 ### ▍ **Publications**
 
 > A comprehensive list of my peer-reviewed articles, conference papers, and other scholarly works. For citations and metrics, please visit my:
-[Google Scholar Profile](https://scholar.google.com/citations?user=DzStP_X60CQC&hl=fr)
-[ResearchGate Profile](https://www.researchgate.net/profile/Si-Mokrane-Siad)
+> [Google Scholar Profile](https://scholar.google.com/citations?user=DzStP_X60CQC&hl=fr) | [ResearchGate Profile](https://www.researchgate.net/profile/Si-Mokrane-Siad)
 
 <details>
 <summary>Click to view full list of publications</summary>
@@ -56,9 +48,14 @@ My research and development work involves the deep utilization, modification, an
 7.  **Implementing parallel processing for DSSAT.** SM Siad. *Humanities Commons*, 2022.
 8.  **Integrated crop-hydrologic Modelling: Methods, frameworks and communities of coupling.** SM Siad. *Humanities Commons*, 2023.
 9.  **Continuous land use/land cover changes impacts on stream flow discharge modelisation and driving factors: A case study in the North-East of Algeria.** SM Siad. *CIHEAM, Mediterranean Agronomic Institute of Bari*, 2015.
-10. **A review of coupled hydrologic and crop growth models.** SM Siad, V Iacobellis, P Zdruli, A Gioia, I Stavi, G Hoogenboom. *Agricultural Water Management 224, 105746*, 2019.
 
 </details>
+<br>
+
+### ▍ **Licensing & Usage Philosophy**
+
+> I am a strong believer in open-source knowledge. To ensure the sustainable development of high-quality open-source tools, a model of fairness is essential for the ecosystem to thrive. Therefore, all of my repositories are free to use for personal, academic, and educational purposes. In the same spirit that academic work requires citation, any commercial application that derives value from this work requires a corresponding commercial license. This dual-license approach is fundamental to the health of open source, allowing innovation to remain accessible for research while ensuring its development is sustainable. All repositories contain a custom license reflecting these principles.
+
 <br>
 
 ### ▍ **Commercial & Collaborative Inquiries**
