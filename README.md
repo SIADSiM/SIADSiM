@@ -1,22 +1,67 @@
-# ⚗️ Welcome to the Experimental LAB ⚡
-<p align="center">
-  <img src="zzz.gif" width="320" alt="Animated chaos of genius" />
-</p>
+# Si Mokrane SIAD, Ph.D.
 
-<p align="center">
-  <b>🚀 Innovation | 💥 Risk | 🧪 Weird Science | 🤯 Genius in Disguise</b>
-</p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=SIADSiM&label=Lab%20Visitors&color=brightgreen&style=for-the-badge" alt="visitor badge" />
-  <img src="https://img.shields.io/github/last-commit/SIADSiM/SIADSiM?style=for-the-badge&color=4caf50" alt="last commit" />
-  <img src="https://img.shields.io/github/stars/SIADSiM/SIADSiM?style=for-the-badge&color=ffb300" alt="stars" />
-</p>
+> **Researcher & Developer | Environmental Systems Modeling & Scientific Software Engineering**
+>
+> Ph.D. in Risk and Environment, Territorial and Building Development
 
 ---
 
-## 📊 Lab Activity Overview
+### ▍ **Professional Synopsis**
 
-<p align="center">
-  <img src="github-metrics.svg" alt="Metrics" />
-</p>
+I am a research scientist specializing in the intersection of environmental science and computational modeling. My work focuses on designing and developing integrated agro-hydrologic models and decision support systems to address challenges in water resource management, agricultural sustainability, and climate change impact assessment.
+
+<br>
+
+### ▍ **Core Competencies & Technology Stack**
+
+```text
+DOMAIN EXPERTISE
+----------------
+- Hydrology & Hydraulics
+- Agronomy & Crop Modeling
+- Remote Sensing & GIS
+- Water Resources Management
+- Climate Change Impact Assessment
+```
+
+```text
+PROGRAMMING & SOFTWARE ENGINEERING
+----------------------------------
+- Languages: FORTRAN (77/90/95), Python, R, Julia, C++, MATLAB & Simulink
+- Development: Algorithm Design, High-Performance Computing, Model Coupling
+```
+
+<br>
+
+### ▍ **Publications**
+
+> A comprehensive list of my peer-reviewed articles, conference papers, and other scholarly works. For citations and metrics, please visit my:
+> [Google Scholar Profile](https://scholar.google.com/citations?user=DzStP_X60CQC&hl=fr) | [ResearchGate Profile](https://www.researchgate.net/profile/Si-Mokrane-Siad)
+
+<details>
+<summary>Click to view full list of publications</summary>
+
+1.  **A review of coupled hydrologic and crop growth models.** SM Siad, V Iacobellis, P Zdruli, A Gioia, I Stavi, G Hoogenboom. *Agricultural Water Management 224, 105746*, 2019.
+2.  **Water runoff harvesting systems for restoration of degraded rangelands: A review of challenges and opportunities.** I Stavi, SM Siad, AP Kyriazopoulos, R Halbac-Cotoara-Zamfir. *Journal of environmental management 259, 109761*, 2020.
+3.  **Durum wheat cover analysis in the scope of policy and market price changes: A case study in Southern Italy.** SM Siad, A Gioia, G Hoogenboom, V Iacobellis, A Novelli, E Tarantino, ... *Agriculture 7 (7), 57*, 2017.
+4.  **Advanced Computer Technologies for Integrated Agro-Hydrologic Systems Modeling.** SM Siad. *Politecnico di Bari*, 2019.
+5.  **AI-Powered Gene-Based Crop Modelling: Advancements and Future Directions.** SM Siad. *HASTAC*, 2023.
+6.  **The Promise and Perils of Google's Bard for Scientific Research.** SM Siad. *HASTAC*, 2023.
+7.  **Implementing parallel processing for DSSAT.** SM Siad. *Humanities Commons*, 2022.
+8.  **Integrated crop-hydrologic Modelling: Methods, frameworks and communities of coupling.** SM Siad. *Humanities Commons*, 2023.
+9.  **Continuous land use/land cover changes impacts on stream flow discharge modelisation and driving factors: A case study in the North-East of Algeria.** SM Siad. *CIHEAM, Mediterranean Agronomic Institute of Bari*, 2015.
+
+</details>
+<br>
+
+### ▍ **Licensing & Usage Philosophy**
+
+> I am a strong believer in open-source knowledge. To ensure the sustainable development of high-quality open-source tools, a model of fairness is essential for the ecosystem to thrive. Therefore, all of my repositories are free to use for personal, academic, and educational purposes. In the same spirit that academic work requires citation, any commercial application that derives value from this work requires a corresponding commercial license. This dual-license approach is fundamental to the health of open source, allowing innovation to remain accessible for research while ensuring its development is sustainable. All repositories contain a custom license reflecting these principles.
+
+<br>
+
+### ▍ **Commercial & Collaborative Inquiries**
+
+I am available for consulting engagements and collaborative research projects. For inquiries regarding commercial software licensing or custom model development, please contact me at:
+
+**[E-Mail](mailto:siadsim@gmail.com)**
